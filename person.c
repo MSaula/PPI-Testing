@@ -1,20 +1,12 @@
 //Authors: Adrià Arroyo & Miquel Saula
 //Date: 2/12/2019
 //Projectes de Programació I - La Salle URL
+#include "person.h"
 
-#define CATCH_CONFIG_MAIN
-
-#include <stdio.h>
-#include <string.h>
-#include "catch.hpp"
-
-typedef struct {
-    char* name;
-    int age;
-} Person;
 
 Person PERSON_create (char * name, int age){
     Person p;
+
 
     p.name = (char*) malloc (strlen(name) * sizeof(char) + 1);
     strcpy(p.name, name);
