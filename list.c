@@ -30,6 +30,7 @@ List LIST_create(){
 	return l;
 }
 
+
 int LIST_deleteFirstPerson(List *l)
 {
 	//Ves inici.
@@ -38,14 +39,22 @@ int LIST_deleteFirstPerson(List *l)
 	LIST_esborrar(l);
 }
 
-/***********************************************
+Person LIST_getOldestPerson(List l)
+{
+	l.pdi = l.pri.seg;
+	if (l->pri == l->ult) write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
+
+}
+
+	/***********************************************
 *
 * @Finalitat: Esborrem un element de Llista
 * @Parametres: punter a la Llista bidireccional per pasarla per referencia
 * @Retorn: -
 *
 ************************************************/
-int LIST_deletePerson (List * l, char* name){
+	int LIST_deletePerson(List *l, char *name)
+{
 	Node* n;
 	int trobat = 0;
 
@@ -241,14 +250,16 @@ int LIST_esBuida (List l){
 *
 * @Finalitat: Destruir tota la llista y els seus elements
 * @Parametres: punter a la Llista bidireccional per pasarla per referencia y posar els seus punters a NULL
-* @Retorn: -
+* @Retorn: 0 si hi ha error. 
+*		   1 si tot esta bé
 *
 ************************************************/
-void LIST_esborrar(List * l){
+int LIST_esborrar(List * l){
 	Node* n;
 
 	if( l -> pdi == l -> pri || l -> pri == l -> ult){
 		write(1, ERR_LIST_DELETE, strlen(ERR_LIST_DELETE));
+		return 0;
 	}
 	else{
 		l -> pdi -> ant -> seg = l -> pdi -> seg;
@@ -257,6 +268,7 @@ void LIST_esborrar(List * l){
 		l -> pdi = l -> pdi -> seg;
 		free(n->person.name);
 		free(n);
+		return 1;
 	}
 }
 
