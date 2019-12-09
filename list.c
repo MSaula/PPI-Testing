@@ -36,7 +36,7 @@ int LIST_deleteFirstPerson(List *l)
 	//Ves inici.
 	l->pdi = l->pri->seg;
 	//Borra el node.
-	LIST_esborrar(l);
+	return LIST_esborrar(l);
 }
 
 Person LIST_getOldestPerson(List l)
