@@ -7,6 +7,7 @@
 
 #define ERR_LIST_CREATE "ERROR: Creating list.\n"
 #define ERR_LIST_DELETE "ERROR: Deleting element form list.\n"
+#define ERR_LIST_GET "ERROR: Element not found.\n"
 #define ERR_LIST_CREATE_NODE "ERROR: Creating auxiliary node for list.\n"
 #define ERR_LIST_INSERT "ERROR: Inserting element in list.\n"
 
@@ -20,7 +21,6 @@ typedef struct {
 	Node * pri;
 	Node * ult;
 	Node * pdi;
-    int size;
 } List;
 
 List LIST_create (void); //Done
@@ -30,7 +30,6 @@ Person LIST_getFirstPerson (List l);
 int LIST_deletePerson (List * l, char* name); //Done
 int LIST_deleteFirstPerson (List * l); //Done
 int LIST_isEmpty (List l); //Done
-int LIST_isFull (List l);
 int LIST_size (List l);
 Person LIST_getOldestPerson (List l);
 Person LIST_getYoungestPerson (List l);

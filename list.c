@@ -109,7 +109,7 @@ int LIST_setPdi(List *l, char* name) {
 Person LIST_getPerson (List l, char* name){
 	if (LIST_setPdi(&l, name) == -1) {
 		write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
-		return NULL; 
+		return NULL;
 	} else {
 		return l.pdi->person;
 	}
@@ -241,7 +241,7 @@ void LIST_inserirFinal (List * l, Client c){
 * @Retorn: enter que ens diu si hi ha alguna fitxa dins de la llista
 *
 ************************************************/
-int LIST_esBuida (List l){
+int LIST_isEmpty (List l){
 	return l.pri -> seg == l.ult;
 }
 
@@ -290,7 +290,7 @@ void LIST_destrueix (List * l){
 * @Retorn: enter que ens diu el nombre d'elements de la llista
 *
 ************************************************/
-int LIST_quants(List l){
+int LIST_size(List l){
 	int i = 0;
 
 	LIST_vesInici(&l);
