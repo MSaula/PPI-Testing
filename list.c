@@ -32,14 +32,10 @@ List LIST_create(){
 
 int LIST_deleteFirstPerson(List *l)
 {
-<<<<<<< HEAD
-
-=======
 	//Ves inici.
 	l->pdi = l->pri->seg;
 	//Borra el node.
 	LIST_esborrar(l);
->>>>>>> b59ec45102ee86b12c85dee239722550b73cb1a7
 }
 
 /***********************************************
