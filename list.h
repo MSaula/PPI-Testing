@@ -24,11 +24,11 @@ typedef struct {
 } List;
 
 List LIST_create (void); //Done
-int LIST_add (List * l, Person p); //
-Person LIST_getPerson (List l, char* name);
+int LIST_add (List * l, Person p); //Done
+Person LIST_getPerson (List l, char* name); //Done
 Person LIST_getFirstPerson (List l);
 int LIST_deletePerson (List * l, char* name); //Done
-int LIST_deleteFirstPerson (List * l); //
+int LIST_deleteFirstPerson (List * l); //Done
 int LIST_isEmpty (List l);
 int LIST_isFull (List l);
 int LIST_size (List l);
