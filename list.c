@@ -278,7 +278,7 @@ void LIST_destrueix (List * l){
 * @Retorn: enter que ens diu el nombre d'elements de la llista
 *
 ************************************************/
-int LIST_quants(List l){
+int LIST_size(List l){
 	int i = 0;
 
 	LIST_vesInici(&l);
