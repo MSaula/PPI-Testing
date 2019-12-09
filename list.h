@@ -23,17 +23,17 @@ typedef struct {
     int size;
 } List;
 
-List LIST_create (void); //
-int LIST_add (List * l, Person p);
+List LIST_create (void); //Done
+int LIST_add (List * l, Person p); //
 Person LIST_getPerson (List l, char* name);
 Person LIST_getFirstPerson (List l);
-int LIST_deletePerson (List * l, char* name); //
-int LIST_deleteFirstPerson (List * l);
+int LIST_deletePerson (List * l, char* name); //Done
+int LIST_deleteFirstPerson (List * l); //
 int LIST_isEmpty (List l);
 int LIST_isFull (List l);
 int LIST_size (List l);
-Person LIST_getOldestPerson(List l);
-Person LIST_getYoungestPerson(List l);
+Person LIST_getOldestPerson (List l);
+Person LIST_getYoungestPerson (List l);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

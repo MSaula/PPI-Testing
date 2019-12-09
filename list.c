@@ -29,6 +29,12 @@ List LIST_create(){
 	}
 	return l;
 }
+
+int LIST_deleteFirstPerson(List *l)
+{
+	
+}
+
 /***********************************************
 *
 * @Finalitat: Esborrem un element de Llista
