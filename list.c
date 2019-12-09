@@ -312,3 +312,21 @@ Person LIST_getOldestPerson(List l)
 
 	return p;
 }
+Person LIST_getOldestPerson(List l)
+{
+	Person p;
+	LIST_vesInici(&l);
+
+	if (LIST_isEmpty(l)) return -1;
+
+	p = l.pdi->person;
+
+	while(!LIST_fi(l)){
+		LIST_avanca(&l);
+		i++;
+
+		p = p.age > l.pdi->age ? l.pdi->person : p;
+	}
+
+	return p;
+}
