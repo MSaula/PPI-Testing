@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "person.h"
 #include "catch.hpp"
 
 typedef struct {
