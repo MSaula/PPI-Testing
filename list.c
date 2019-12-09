@@ -74,7 +74,8 @@ int LIST_deletePerson (List * l, char* name){
 	} else return 1;
 }
 
-
+// Coloca el pdi a la primera persona que coincideix amb el nom donat
+// Si no troba la persona retorna -1, sino retorna 1
 int LIST_setPdi(List *l, char* name) {
 	l->pdi = l->pri->seg;
 
@@ -94,17 +95,11 @@ int LIST_setPdi(List *l, char* name) {
 *
 ************************************************/
 Person LIST_getPerson (List l, char* name){
-void LIST_getPerson (List l, Client **c){
-
 	if (LIST_setPdi(&l, name) == -1) {
-		
-	}
-
-	if(l.pdi == l.pri || l.pdi == l.ult){
-		(*c)->type = -1;
-	}
-	else{
-		*c = &(l.pdi -> client);
+		write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
+		return NULL; 
+	} else {
+		return l.pdi->person;
 	}
 }
 /***********************************************
@@ -246,6 +241,22 @@ int LIST_esBuida (List l){
 * @Retorn: -
 *
 ************************************************/
+void LLISTABID_esborrar(LlistaBid * l){
+	Node* n;
+
+	if( l -> pdi == l -> pri || l -> pri == l -> ult){
+		write(1, ERR_LIST_DELETE, strlen(ERR_LIST_DELETE));
+	}
+	else{
+		l -> pdi -> ant -> seg = l -> pdi -> seg;
+		l -> pdi -> seg -> ant = l -> pdi -> ant;
+		n = l -> pdi;
+		l -> pdi = l -> pdi -> seg;
+		free(n->client.name);
+		free(n);
+	}
+}
+
 void LIST_destrueix (List * l){
 	LIST_vesInici(l);
 	while(!LIST_esBuida(*l)){
