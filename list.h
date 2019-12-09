@@ -29,7 +29,7 @@ Person LIST_getPerson (List l, char* name); //Done
 Person LIST_getFirstPerson (List l);
 int LIST_deletePerson (List * l, char* name); //Done
 int LIST_deleteFirstPerson (List * l); //Done
-int LIST_isEmpty (List l);
+int LIST_isEmpty (List l); //Done
 int LIST_isFull (List l);
 int LIST_size (List l);
 Person LIST_getOldestPerson (List l);

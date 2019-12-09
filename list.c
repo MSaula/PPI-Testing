@@ -32,7 +32,10 @@ List LIST_create(){
 
 int LIST_deleteFirstPerson(List *l)
 {
-	
+	//Ves inici.
+	l->pdi = l->pri->seg;
+	//Borra el node.
+	LIST_esborrar(l);
 }
 
 /***********************************************
@@ -241,7 +244,7 @@ int LIST_esBuida (List l){
 * @Retorn: -
 *
 ************************************************/
-void LLISTABID_esborrar(LlistaBid * l){
+void LIST_esborrar(List * l){
 	Node* n;
 
 	if( l -> pdi == l -> pri || l -> pri == l -> ult){
@@ -252,7 +255,7 @@ void LLISTABID_esborrar(LlistaBid * l){
 		l -> pdi -> seg -> ant = l -> pdi -> ant;
 		n = l -> pdi;
 		l -> pdi = l -> pdi -> seg;
-		free(n->client.name);
+		free(n->person.name);
 		free(n);
 	}
 }
