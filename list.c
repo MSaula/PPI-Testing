@@ -36,7 +36,7 @@ int LIST_deleteFirstPerson(List *l)
 	//Ves inici.
 	l->pdi = l->pri->seg;
 	//Borra el node.
-	return LIST_esborrar(l);
+	return LIST_deleteElement(l);
 }
 
 Person LIST_getOldestPerson(List l)
@@ -121,7 +121,7 @@ Person LIST_getPerson (List l, char* name){
 * @Retorn: -
 *
 ************************************************/
-void LIST_avanca (List * l){
+void LIST_next (List * l){
 	if (l -> pdi != l -> ult){
 		l -> pdi = l -> pdi -> seg;
 	}
@@ -143,41 +143,10 @@ int LIST_fi (List l){
 * @Retorn: -
 *
 ************************************************/
-void LIST_vesInici (List * l){
+void LIST_goFirstNode (List * l){
 	l -> pdi = l -> pri -> seg;
 }
-/***********************************************
-*
-* @Finalitat: Retrocedeix el punter pdi en una posicio de la llista
-* @Parametres: punter a la Llista bidireccional per pasarla per referencia
-* @Retorn: -
-*
-************************************************/
-void LIST_retrocedeix (List * l){
-	if(l -> pdi != l -> pri){
-		l -> pdi = l -> pdi -> ant;
-	}
-}
-/***********************************************
-*
-* @Finalitat: Ens porta al Inici de la Llista
-* @Parametres: punter a la Llista bidireccional per pasarla per referencia
-* @Retorn: Flag que ens diu si ens trobem al inici o no
-*
-************************************************/
-int LIST_inici (List l){
-	return l.pdi == l.pri;
-}
-/***********************************************
-*
-* @Finalitat: Ens porta al final de la Llista
-* @Parametres: punter a la Llista bidireccional per pasarla per referencia
-* @Retorn: -
-*
-************************************************/
-void LIST_vesFinal (List * l){
-	l -> pdi = l -> ult -> ant;
-}
+
 /***********************************************
 *
 * @Finalitat: Introdueix un client dins de la llista al principi
@@ -187,7 +156,7 @@ void LIST_vesFinal (List * l){
 ************************************************/
 void LIST_inserirPrincipi (List * l, Client c){
 	Node* n = NULL;
-	LIST_vesInici(l);
+	LIST_goFirstNode(l);
 	if(l -> pdi != l -> pri){
 
 		n = (Node*)malloc(sizeof(Node));
@@ -254,7 +223,7 @@ int LIST_isEmpty (List l){
 *		   1 si tot esta bé
 *
 ************************************************/
-int LIST_esborrar(List * l){
+int LIST_deleteElement(List * l){
 	Node* n;
 
 	if( l -> pdi == l -> pri || l -> pri == l -> ult){
@@ -272,10 +241,10 @@ int LIST_esborrar(List * l){
 	}
 }
 
-void LIST_destrueix (List * l){
-	LIST_vesInici(l);
-	while(!LIST_esBuida(*l)){
-		LIST_esborrar(l);
+void LIST_destroy (List * l){
+	LIST_goFirstNode(l);
+	while(!LIST_isEmpty(*l)){
+		LIST_deleteElement(l);
 	}
 	free(l -> pri);
 	free(l -> ult);
@@ -293,10 +262,11 @@ void LIST_destrueix (List * l){
 int LIST_size(List l){
 	int i = 0;
 
-	LIST_vesInici(&l);
-	while(!LIST_fi(l)){
-		LIST_avanca(&l);
-		i++;
+	LIST_goFirstNode(&l);
+	while (l.pdi != l.ult)
+		{
+			LIST_next(&l);
+			i++;
 	}
 	return i;
 }

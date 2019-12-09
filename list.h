@@ -26,28 +26,18 @@ typedef struct {
 List LIST_create (void); //Done
 int LIST_add (List * l, Person p); //Done
 Person LIST_getPerson (List l, char* name); //Done
-Person LIST_getFirstPerson (List l);
+Person LIST_getFirstPerson (List l); //
 int LIST_deletePerson (List * l, char* name); //Done
 int LIST_deleteFirstPerson (List * l); //Done
 int LIST_isEmpty (List l); //Done
-int LIST_size (List l);
+int LIST_size (List l); //Done
 Person LIST_getOldestPerson (List l);
 Person LIST_getYoungestPerson (List l);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void LIST_inserirPrincipi(List * l, Client client);	//introdueix un element al principi de la llista
-void LIST_inserirFinal(List * l, Client client);	//introdueix un element al final de la llista
-void LIST_consulta(List l, Client **client);			//retorna per referencia un element de la llista
-int LIST_esborrar(List * l);					//esborra un element de la llista
-void LIST_vesInici(List * l);					//mou el pdi al inici de la llista
-void LIST_avanca(List * l);					//avanca el pdi en una posicio de la lista
-int LIST_fi (List l);							//ens mostra si ens trobem al final de la llista
-int LIST_esBuida (List l);					//ens mostra si tenim una llista sense elements
-void LIST_vesFinal (List * l);				//mou el pdi al final de la llista
-void LIST_retrocedeix (List * l);				//retrocedeix el pdi en una posicio de la llista
-int LIST_inici (List l);						//ens mostra si ens trobem al inici de la llista
-int LIST_quants(List l);						//ens retorna el nombre d'elements que conte la llista
-void LIST_destrueix (List * l);				//destrueix la llista i els seus elements
+//Private Helpers
+static int LIST_deleteElement(List *l);   //esborra un element de la llista
+static void LIST_goFirstNode(List *l);	//mou el pdi al inici de la llista
+static void LIST_next(List *l);	//avanca el pdi en una posicio de la lista
+static void LIST_destroy(List *l); //destrueix la llista i els seus elements
 
 #endif
