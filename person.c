@@ -54,14 +54,17 @@ Person PERSON_undefined ()
     return p;
 }
 
-int PERSON_isUndefined (Person p){
+int PERSON_isUndefined (Person p)
+{
     return p.name == NULL && p.age == -1;
 }
 
-int PERSON_compareByName (Person p1, Person p2){
+int PERSON_compareByName (Person p1, Person p2)
+{
     return strcmp(p1.name, p2.name);
 }
 
-int PERSON_compareByAge (Person p1, Person p2){
+int PERSON_compareByAge (Person p1, Person p2)
+{
     return p1.age - p2.age;
 }

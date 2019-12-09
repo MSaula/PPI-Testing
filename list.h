@@ -4,6 +4,7 @@
 #include "person.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define ERR_LIST_CREATE "ERROR: Creating list.\n"
 #define ERR_LIST_DELETE "ERROR: Deleting element form list.\n"
@@ -11,7 +12,7 @@
 #define ERR_LIST_CREATE_NODE "ERROR: Creating auxiliary node for list.\n"
 #define ERR_LIST_INSERT "ERROR: Inserting element in list.\n"
 
-typedef struct _Node {
+typedef struct node_t{
 	Person person;
 	struct node_t * seg;
 	struct node_t * ant;

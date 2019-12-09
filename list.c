@@ -63,7 +63,7 @@ int LIST_deleteFirstPerson(List *l)
 				l -> pdi -> seg -> ant = l -> pdi -> ant;
 				n = l -> pdi;
 				l -> pdi = l -> pdi -> seg;
-				free(n->client.name);
+				free(n->person.name);
 				free(n);
 
 				break;
@@ -85,7 +85,7 @@ int LIST_setPdi(List *l, char* name) {
 	l->pdi = l->pri->seg;
 
 	while (l->pdi != l->ult) {
-		if (!strcmp(PERSON_getName(l->pdi->person), name) return 1;
+		if (!strcmp(PERSON_getName(l->pdi->person), name)) return 1;
 		l->pdi = l->pdi->seg;
 	}
 
@@ -102,7 +102,7 @@ int LIST_setPdi(List *l, char* name) {
 Person LIST_getPerson (List l, char* name){
 	if (LIST_setPdi(&l, name) == -1) {
 		write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
-		return NULL;
+		return PERSON_undefined();
 	} else {
 		return l.pdi->person;
 	}
@@ -140,62 +140,6 @@ void LIST_goFirstNode (List * l){
 	l -> pdi = l -> pri -> seg;
 }
 
-/***********************************************
-*
-* @Finalitat: Introdueix un client dins de la llista al principi
-* @Parametres: punter a la Llista bidireccional per pasarla per referencia, Client c que s'inserira a la Llista
-* @Retorn: -
-*
-************************************************/
-void LIST_inserirPrincipi (List * l, Client c){
-	Node* n = NULL;
-	LIST_goFirstNode(l);
-	if(l -> pdi != l -> pri){
-
-		n = (Node*)malloc(sizeof(Node));
-
-		if(n == NULL){
-			write(1, ERR_LIST_CREATE_NODE, strlen(ERR_LIST_CREATE_NODE));
-		}
-		else{
-			n -> client = c;
-			n -> seg = l -> pdi;
-			n -> ant = l -> pdi -> ant;
-			l -> pdi -> ant -> seg = n;
-			l -> pdi -> ant = n;
-		}
-	}
-	else{
-		write(1, ERR_LIST_INSERT, strlen(ERR_LIST_INSERT));
-	}
-}
-/***********************************************
-*
-* @Finalitat: Introdueix El client c dins de la llista al final
-* @Parametres: punter a la Llista bidireccional per pasarla per referencia, client c que s'inserira a la Llista
-* @Retorn: -
-*
-************************************************/
-void LIST_inserirFinal (List * l, Client c){
-	Node* n = NULL;
-
-	if (l -> pdi == l -> ult){
-		write(1, ERR_LIST_INSERT, strlen(ERR_LIST_INSERT));
-	}
-	else{
-		n = (Node*)malloc(sizeof(Node));
-		if (n == NULL){
-			write(1, ERR_LIST_CREATE_NODE, strlen(ERR_LIST_CREATE_NODE));
-		}
-		else{
-			n -> client = c;
-			n -> seg = l -> pdi -> seg;
-			n -> ant = l -> pdi;
-			l -> pdi -> seg -> ant = n;
-			l -> pdi -> seg = n;
-		}
-	}
-}
 /***********************************************
 *
 * @Finalitat: Ens diu si la nostra llista esta buida
@@ -267,35 +211,33 @@ int LIST_size(List l){
 Person LIST_getOldestPerson(List l)
 {
 	Person p;
-	LIST_vesInici(&l);
-
-	if (LIST_isEmpty(l)) return -1;
+	LIST_goFirstNode(&l);
+	
+	if (LIST_isEmpty(l)) return PERSON_undefined();
 
 	p = l.pdi->person;
 
 	while(!LIST_fi(l)){
-		LIST_avanca(&l);
-		i++;
-
-		p = p.age < l.pdi->age ? l.pdi->person : p;
+		LIST_next(&l);
+		p = p.age < l.pdi->person.age ? l.pdi->person : p;
 	}
 
 	return p;
 }
-Person LIST_getOldestPerson(List l)
+Person LIST_getYoungestPerson(List l)
 {
 	Person p;
-	LIST_vesInici(&l);
+	LIST_goFirstNode(&l);
 
-	if (LIST_isEmpty(l)) return -1;
+	if (LIST_isEmpty(l))
+		return PERSON_undefined();
 
 	p = l.pdi->person;
 
 	while(!LIST_fi(l)){
-		LIST_avanca(&l);
-		i++;
+		LIST_next(&l);
 
-		p = p.age > l.pdi->age ? l.pdi->person : p;
+		p = p.age > l.pdi->person.age ? l.pdi->person : p;
 	}
 
 	return p;
