@@ -32,7 +32,7 @@ List LIST_create(){
 
 int LIST_deleteFirstPerson(List *l)
 {
-	
+
 }
 
 /***********************************************
@@ -97,7 +97,7 @@ int LIST_setPdi(List *l, char* name) {
 Person LIST_getPerson (List l, char* name){
 	if (LIST_setPdi(&l, name) == -1) {
 		write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
-		return NULL; 
+		return NULL;
 	} else {
 		return l.pdi->person;
 	}
@@ -229,7 +229,7 @@ void LIST_inserirFinal (List * l, Client c){
 * @Retorn: enter que ens diu si hi ha alguna fitxa dins de la llista
 *
 ************************************************/
-int LIST_esBuida (List l){
+int LIST_isEmpty (List l){
 	return l.pri -> seg == l.ult;
 }
 
