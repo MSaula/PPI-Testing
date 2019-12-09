@@ -30,16 +30,16 @@ Person LIST_getFirstPerson (List l);
 int LIST_deletePerson (List * l, char* name); //Done
 int LIST_deleteFirstPerson (List * l); //Done
 int LIST_isEmpty (List l); //Done
-int LIST_size (List l);
-Person LIST_getOldestPerson (List l);
-Person LIST_getYoungestPerson (List l);
+int LIST_size (List l); //Done
+Person LIST_getOldestPerson (List l); //Done
+Person LIST_getYoungestPerson (List l); //Done
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void LIST_inserirPrincipi(List * l, Client client);	//introdueix un element al principi de la llista
 void LIST_inserirFinal(List * l, Client client);	//introdueix un element al final de la llista
 void LIST_consulta(List l, Client **client);			//retorna per referencia un element de la llista
-int LIST_esborrar(List * l);					//esborra un element de la llista
+void LIST_esborrar(List * l);					//esborra un element de la llista
 void LIST_vesInici(List * l);					//mou el pdi al inici de la llista
 void LIST_avanca(List * l);					//avanca el pdi en una posicio de la lista
 int LIST_fi (List l);							//ens mostra si ens trobem al final de la llista

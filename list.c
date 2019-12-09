@@ -39,13 +39,6 @@ int LIST_deleteFirstPerson(List *l)
 	return LIST_esborrar(l);
 }
 
-Person LIST_getOldestPerson(List l)
-{
-	l.pdi = l.pri.seg;
-	if (l->pri == l->ult) write(1, ERR_LIST_GET, strlen(ERR_LIST_GET));
-
-}
-
 	/***********************************************
 *
 * @Finalitat: Esborrem un element de Llista
@@ -250,7 +243,7 @@ int LIST_isEmpty (List l){
 *
 * @Finalitat: Destruir tota la llista y els seus elements
 * @Parametres: punter a la Llista bidireccional per pasarla per referencia y posar els seus punters a NULL
-* @Retorn: 0 si hi ha error. 
+* @Retorn: 0 si hi ha error.
 *		   1 si tot esta bé
 *
 ************************************************/
@@ -299,4 +292,23 @@ int LIST_size(List l){
 		i++;
 	}
 	return i;
+}
+
+Person LIST_getOldestPerson(List l)
+{
+	Person p;
+	LIST_vesInici(&l);
+
+	if (LIST_isEmpty(l)) return -1;
+
+	p = l.pdi->person;
+
+	while(!LIST_fi(l)){
+		LIST_avanca(&l);
+		i++;
+
+		p = p.age < l.pdi->age ? l.pdi->person : p;
+	}
+
+	return p;
 }
