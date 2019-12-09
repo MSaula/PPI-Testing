@@ -2,19 +2,10 @@
 //Date: 2/12/2019
 //Projectes de Programació I - La Salle URL
 
-#define CATCH_CONFIG_MAIN
-
-#include <stdio.h>
-#include <string.h>
 #include "person.h"
-#include "catch.hpp"
 
-typedef struct {
-    char* name;
-    int age;
-} Person;
-
-Person PERSON_create (char * name, int age){
+Person PERSON_create (char * name, int age)
+{
     Person p;
 
     p.name = (char*) malloc (strlen(name) * sizeof(char) + 1);
@@ -25,30 +16,36 @@ Person PERSON_create (char * name, int age){
     return p;
 }
 
-char* PERSON_getName (Person p){
+char* PERSON_getName (Person p)
+{
     return p.name;
 }
 
-int PERSON_getAge (Person p){
+int PERSON_getAge (Person p)
+{
     return p.age;
 }
 
-void PERSON_setName (Person * p, char * nom){
+void PERSON_setName (Person * p, char * nom)
+{
     p->name = (char *) realloc(p->name, strlen(nom) * sizeof(nom) + 1);
     strcpy(p->name, nom);
 }
 
-void PERSON_setAge (Person * p, int age){
+void PERSON_setAge (Person * p, int age)
+{
     p->age = age;
 }
 
-void PERSON_destroy (Person* p){
+void PERSON_destroy (Person* p)
+{
     free(p->name);
     p->name = NULL;
     p->age = 0;
 }
 
-Person PERSON_undefined (){
+Person PERSON_undefined ()
+{
     Person p;
 
     p.name = NULL;
