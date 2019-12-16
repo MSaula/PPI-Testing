@@ -39,6 +39,6 @@ Person LIST_getYoungestPerson (List l);
 static int LIST_deleteElement(List *l);   //esborra un element de la llista
 static void LIST_goFirstNode(List *l);	//mou el pdi al inici de la llista
 static void LIST_next(List *l);	//avanca el pdi en una posicio de la lista
-static void LIST_destroy(List *l); //destrueix la llista i els seus elements
+static int LIST_destroy(List *l); //destrueix la llista i els seus elements
 
 #endif

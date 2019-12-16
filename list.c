@@ -18,6 +18,7 @@ List LIST_create(){
 		l.ult = (Node*)malloc(sizeof(Node));
 		if(l.ult == NULL){
 			free(l.pri);
+			write(1, ERR_LIST_CREATE, strlen(ERR_LIST_CREATE));
 		}
 		else{
 			l.pdi = l.pri;
@@ -178,15 +179,17 @@ int LIST_deleteElement(List * l){
 	}
 }
 
-void LIST_destroy (List * l){
+int LIST_destroy (List * l){
 	LIST_goFirstNode(l);
+	int status = 1;
 	while(!LIST_isEmpty(*l)){
-		LIST_deleteElement(l);
+		status &= LIST_deleteElement(l);
 	}
 	free(l -> pri);
 	free(l -> ult);
 	l -> pri = NULL;
 	l -> ult = NULL;
+	return status;
 }
 
 /***********************************************
