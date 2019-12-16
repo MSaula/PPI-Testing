@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "person.h"
+#include "../person.h"
 
 TEST_CASE("Comprovant la generació de l'objecte", "[CREATE]")
 {
