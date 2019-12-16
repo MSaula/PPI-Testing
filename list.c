@@ -242,3 +242,26 @@ Person LIST_getYoungestPerson(List l)
 
 	return p;
 }
+
+int LLISTA_add (List* l, Person p){
+	Node* n = NULL;
+	LLISTABID_vesInici(l);
+	if(l -> pdi != l -> pri){
+
+		n = (Node*)malloc(sizeof(Node));
+
+		if(n == NULL){
+			write(1, ERR_LIST_CREATE_NODE, strlen(ERR_LIST_CREATE_NODE));
+		}
+		else{
+			n -> person = p;
+			n -> seg = l -> pdi;
+			n -> ant = l -> pdi -> ant;
+			l -> pdi -> ant -> seg = n;
+			l -> pdi -> ant = n;
+		}
+	}
+	else{
+		write(1, ERR_LIST_INSERT, strlen(ERR_LIST_INSERT));
+	}
+}
