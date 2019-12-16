@@ -36,9 +36,9 @@ Person LIST_getOldestPerson (List l);
 Person LIST_getYoungestPerson (List l);
 
 //Private Helpers
-static int LIST_deleteElement(List *l);   //esborra un element de la llista
-static void LIST_goFirstNode(List *l);	//mou el pdi al inici de la llista
-static void LIST_next(List *l);	//avanca el pdi en una posicio de la lista
-static int LIST_destroy(List *l); //destrueix la llista i els seus elements
+int LIST_deleteElement(List *l);   //esborra un element de la llista
+void LIST_goFirstNode(List *l);	//mou el pdi al inici de la llista
+void LIST_next(List *l);	//avanca el pdi en una posicio de la lista
+int LIST_destroy(List *l); //destrueix la llista i els seus elements
 
 #endif

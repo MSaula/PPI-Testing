@@ -108,14 +108,22 @@ Person LIST_getPerson (List l, char* name){
 		return l.pdi->person;
 	}
 }
-/***********************************************
+
+Person LIST_getFirstPerson(List l){
+	LIST_goFirstNode(&l);
+	return l.pdi->person;
+}
+
+	/***********************************************
 *
 * @Finalitat: Avançar el punter pdi de la Llista
 * @Parametres: punter a la Llista bidireccional per pasarla per referencia
 * @Retorn: -
 *
 ************************************************/
-void LIST_next (List * l){
+	void
+	LIST_next(List *l)
+{
 	if (l -> pdi != l -> ult){
 		l -> pdi = l -> pdi -> seg;
 	}
@@ -248,13 +256,14 @@ Person LIST_getYoungestPerson(List l)
 
 int LLISTA_add (List* l, Person p){
 	Node* n = NULL;
-	LLISTABID_vesInici(l);
+	LIST_goFirstNode(l);
 	if(l -> pdi != l -> pri){
 
 		n = (Node*)malloc(sizeof(Node));
 
 		if(n == NULL){
 			write(1, ERR_LIST_CREATE_NODE, strlen(ERR_LIST_CREATE_NODE));
+			return 0;
 		}
 		else{
 			n -> person = p;
@@ -262,9 +271,11 @@ int LLISTA_add (List* l, Person p){
 			n -> ant = l -> pdi -> ant;
 			l -> pdi -> ant -> seg = n;
 			l -> pdi -> ant = n;
+			return 1;
 		}
 	}
 	else{
 		write(1, ERR_LIST_INSERT, strlen(ERR_LIST_INSERT));
+		return 0;
 	}
 }
