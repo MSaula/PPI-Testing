@@ -1,14 +1,41 @@
-SHELL:=/bin/bash
-CC=g++
-CFLAGS=-I -Wall -Wextra 
-DEPS = person.c person.h TESTS/catch.hpp list.c list.h
+CC = g++
+CFLAGS = -Wall -Wextra -std=c++11
+LDLIBS =
+P = llista
+OBJ = main.o list.o person.o
 
-#Color aleatori because yes.
-all:
-	@clear
-	@echo -n -e "\e[3$$(( $$RANDOM * 6 / 32767 + 1))mCompilant exerici...\n\033[0m"
-	$(CC) main.c $(DEPS) $(CFLAGS) -o test
-	@echo -n -e "\e[3$$(( $$RANDOM * 6 / 32767 + 1))mFet!\n\033[0m"
-	
+TEST_MODULES = TESTS/person-test TESTS/static-list-test
+OBJ_PERSON_TESTS = TESTS/person-test.o person.o
+OBJ_LIST_TESTS = TESTS/list-test.o list.o person.o
+
+
+### Compilation Targets ###
+.PHONY: all
+all: $(P)
+
+$(P): $(OBJ)
+	$(CC) $(OBJ) -o $(P) $(CFLAGS)
+
+### Testing Targets ###
+.PHONY: run-tests make-tests
+run-tests:
+	./TESTS/person-test
+	./TESTS/list-test
+
+make-tests: $(TEST_MODULES)
+
+	# Test Modules
+TESTS/person-test: $(OBJ_PERSON_TESTS)
+	$(CC) $(OBJ_PERSON_TESTS) $(CFLAGS) $(LDLIBS) -o $@
+
+TESTS/static-list-test: $(OBJ_LIST_TESTS)
+	$(CC) $(OBJ_LIST_TESTS) $(CFLAGS) $(LDLIBS) -o $@
+
+
+#Cleanning Targets
+.PHONY: clean clean-tests
 clean:
-	@rm person.o test
+	rm $(OBJ) $(P)
+
+clean-tests:
+	rm $(OBJ_LIST_TESTS) $(OBJ_PERSON_TESTS) $(TEST_MODULES)
