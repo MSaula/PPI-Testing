@@ -4,7 +4,7 @@ LDLIBS =
 P = llista
 OBJ = main.o list.o person.o
 
-TEST_MODULES = TESTS/person-test TESTS/static-list-test
+TEST_MODULES = TESTS/person-test TESTS/list-test
 OBJ_PERSON_TESTS = TESTS/person-test.o person.o
 OBJ_LIST_TESTS = TESTS/list-test.o list.o person.o
 
@@ -28,7 +28,7 @@ make-tests: $(TEST_MODULES)
 TESTS/person-test: $(OBJ_PERSON_TESTS)
 	$(CC) $(OBJ_PERSON_TESTS) $(CFLAGS) $(LDLIBS) -o $@
 
-TESTS/static-list-test: $(OBJ_LIST_TESTS)
+TESTS/list-test: $(OBJ_LIST_TESTS)
 	$(CC) $(OBJ_LIST_TESTS) $(CFLAGS) $(LDLIBS) -o $@
 
 
