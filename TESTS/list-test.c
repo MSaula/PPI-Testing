@@ -23,7 +23,7 @@ TEST_CASE("Comprovant la creacio the List", "[CREATE]") {
     }
 }
 
-TEST_CASE("Comprovant el insert", "[INSERT]") {
+TEST_CASE("Comprovant el add", "[INSERT]") {
     List l;
     l = LIST_create();
     char nom[] = "Ramon";
@@ -40,9 +40,53 @@ TEST_CASE("Comprovant el insert", "[INSERT]") {
     }
 }
 
+TEST_CASE("Comprovant la eliminació de la llista", "[DESTROY]") {
+    List l;
+    Person p1, p2;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 345);
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+
+    SECTION("Comprovant que es borra la llista") {
+        REQUIRE(LIST_destroy(&l) == 1);
+        REQUIRE(l.pri == NULL);
+        REQUIRE(l.ult == NULL);
+    }
+}
+
+TEST_CASE("Comprovant la funció LIST_isEmpty", "[EMPTY]") {
+    List l;
+    Person p1, p2;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 345);
+
+    SECTION("Abans d'afegir cap persona") {
+        REQUIRE(LIST_isEmpty(l));
+    }
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+
+    SECTION("Després d'afegir els elements") {
+        REQUIRE(!LIST_isEmpty(l));
+    }
+}
+
 TEST_CASE("Comprovant l'esborrat d'una persona", "[DELETE]") {
     List l;
-    Person p1, p2, paux;
+    Person p1, p2;
     char nom1[] = "Ramon";
     char nom2[] = "Antonia";
     char nom3[] = "Miquel";
@@ -64,14 +108,6 @@ TEST_CASE("Comprovant l'esborrat d'una persona", "[DELETE]") {
         REQUIRE(PERSON_isUndefined(LIST_getPerson(l, nom1)));
     }
 
-    SECTION("Comprovant l'eliminació del primer element") {
-        paux = LIST_getFirstPerson(l);
-        REQUIRE(PERSON_compareByName(paux, p2) == 0);
-        REQUIRE(LIST_deleteFirstPerson(&l) == 1);
-        paux = LIST_getFirstPerson(l);
-        REQUIRE(PERSON_compareByName(paux, p1) == 0);
-    }
-
     SECTION("Comprovant la eliminació completa") {
         REQUIRE(!LIST_isEmpty(l));
         LIST_deletePerson(&l, nom1);
@@ -81,9 +117,32 @@ TEST_CASE("Comprovant l'esborrat d'una persona", "[DELETE]") {
 
 }
 
-TEST_CASE("Comprovant els getters", "[GET]") {
+TEST_CASE("Comprovant l'eliminació a partir de la funció LIST_deleteFirstPerson()", "[DELETE_FIRST]") {
     List l;
-    Person p1, p2, paux, pauxx;
+    Person p1, p2, paux;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 345);
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+
+    SECTION("Comprovant l'eliminació del primer element") {
+        paux = LIST_getFirstPerson(l);
+        REQUIRE(PERSON_compareByName(paux, p2) == 0);
+        REQUIRE(LIST_deleteFirstPerson(&l) == 1);
+        paux = LIST_getFirstPerson(l);
+        REQUIRE(PERSON_compareByName(paux, p1) == 0);
+    }
+}
+
+TEST_CASE("Comprovant la funció LIST_getPerson()", "[GET]") {
+    List l;
+    Person p1, p2, paux;
     char nom1[] = "Ramon";
     char nom2[] = "Antonia";
     char nom3[] = "Miquel";
@@ -106,8 +165,23 @@ TEST_CASE("Comprovant els getters", "[GET]") {
         paux = LIST_getPerson(l, nom3);
         REQUIRE(PERSON_isUndefined(paux));
     }
+}
 
-    SECTION("Comprovant el getFirst") {
+TEST_CASE("Comprovant la obtenció del primer element", "[GET_FIRST]") {
+    List l;
+    Person p1, p2, paux, pauxx;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 345);
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+
+    SECTION("Comprovant la funció getFirst") {
         paux = LIST_getFirstPerson(l);
         pauxx = LIST_getPerson(l, nom2);
         REQUIRE(PERSON_compareByName(paux, pauxx) == 0);
@@ -146,7 +220,7 @@ TEST_CASE("Comprovant la funció LIST_size()", "[SIZE]") {
     }
 }
 
-TEST_CASE("Comprovant els getters d'edat", "[GET_LIMIT_AGE]") {
+TEST_CASE("Comprovant el getter d'edat més gran", "[GET_OLDEST]") {
     List l;
     Person p1, p2, p3, p4, p5, paux;
     char nom1[] = "Ramon";
@@ -161,6 +235,11 @@ TEST_CASE("Comprovant els getters d'edat", "[GET_LIMIT_AGE]") {
     p4 = PERSON_create(nom2, 22);
     p5 = PERSON_create(nom1, 27);
 
+    SECTION("Obtenció del més gran sense elements a la llista") {
+        paux = LIST_getOldestPerson(l);
+        REQUIRE(PERSON_isUndefined(paux));
+    }
+
     LIST_add(&l, p1);
     LIST_add(&l, p2);
     LIST_add(&l, p3);
@@ -172,6 +251,33 @@ TEST_CASE("Comprovant els getters d'edat", "[GET_LIMIT_AGE]") {
         REQUIRE(PERSON_compareByName(paux, p1) == 0);
         REQUIRE(PERSON_compareByAge(paux, p1) == 0);
     }
+}
+
+TEST_CASE("Comprovant el getter d'edat més petits", "[GET_YOUNGEST]") {
+    List l;
+    Person p1, p2, p3, p4, p5, paux;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+    char nom3[] = "Miquel";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 33);
+    p3 = PERSON_create(nom3, 21);
+    p4 = PERSON_create(nom2, 22);
+    p5 = PERSON_create(nom1, 27);
+
+    SECTION("Obtenció del més gran sense elements a la llista") {
+        paux = LIST_getYoungestPerson(l);
+        REQUIRE(PERSON_isUndefined(paux));
+    }
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+    LIST_add(&l, p3);
+    LIST_add(&l, p4);
+    LIST_add(&l, p5);
 
     SECTION("Obtenció del més petit") {
         paux = LIST_getYoungestPerson(l);

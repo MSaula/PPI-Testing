@@ -33,13 +33,13 @@ int LIST_deletePerson (List * l, char* name); //Tested
 int LIST_deleteFirstPerson (List * l); //Tested
 int LIST_isEmpty (List l); //Tested
 int LIST_size (List l); //Tested
-Person LIST_getOldestPerson (List l);
-Person LIST_getYoungestPerson (List l);
+Person LIST_getOldestPerson (List l);//Tested
+Person LIST_getYoungestPerson (List l);//Tested
+int LIST_destroy(List *l); //destrueix la llista i els seus elements
 
 //Private Helpers
 int LIST_deleteElement(List *l);   //esborra un element de la llista
 void LIST_goFirstNode(List *l);	//mou el pdi al inici de la llista
 void LIST_next(List *l);	//avanca el pdi en una posicio de la lista
-int LIST_destroy(List *l); //destrueix la llista i els seus elements
 
 #endif
