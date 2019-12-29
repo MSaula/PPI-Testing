@@ -3,7 +3,7 @@
 
 #include "../person.h"
 
-TEST_CASE("Comprovant la generació de l'objecte", "[CREATE]")
+TEST_CASE("Comprovant la generacio de l'objecte", "[CREATE]")
 {
     char nom[] = "Ramon";
     Person p = PERSON_create(nom, 456);

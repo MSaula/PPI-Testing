@@ -19,8 +19,8 @@ $(P): $(OBJ)
 ### Testing Targets ###
 .PHONY: run-tests make-tests
 run-tests:
-	./TESTS/person-test.c
-	./TESTS/list-test.c
+	./TESTS/person-test
+	./TESTS/list-test
 
 make-tests: $(TEST_MODULES)
 

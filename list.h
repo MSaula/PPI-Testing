@@ -1,10 +1,11 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-#include "person.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "person.h"
 
 #define ERR_LIST_CREATE "ERROR: Creating list.\n"
 #define ERR_LIST_DELETE "ERROR: Deleting element form list.\n"

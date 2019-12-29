@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+
 #include "../list.h"
 
 TEST_CASE("Comprovant la creacio the List", "[CREATE]")
@@ -11,7 +12,7 @@ TEST_CASE("Comprovant la creacio the List", "[CREATE]")
         l = LIST_create();
         REQUIRE(l.pri != NULL);
         REQUIRE(l.ult != NULL);
-     
+
         SECTION("Comprovant que esta buida")
         {
             REQUIRE(LIST_isEmpty(l));

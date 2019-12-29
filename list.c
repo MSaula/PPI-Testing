@@ -47,7 +47,7 @@ int LIST_deleteFirstPerson(List *l)
 * @Retorn: -
 *
 ************************************************/
-	int LIST_deletePerson(List *l, char *name)
+int LIST_deletePerson(List *l, char *name)
 {
 	Node* n;
 	int trobat = 0;
@@ -109,21 +109,18 @@ Person LIST_getPerson (List l, char* name){
 	}
 }
 
-Person LIST_getFirstPerson(List l){
-	LIST_goFirstNode(&l);
-	return l.pdi->person;
+Person LIST_getFirstPerson (List l){
+	return l.pri->seg->person;
 }
 
-	/***********************************************
+/***********************************************
 *
 * @Finalitat: Avançar el punter pdi de la Llista
 * @Parametres: punter a la Llista bidireccional per pasarla per referencia
 * @Retorn: -
 *
 ************************************************/
-	void
-	LIST_next(List *l)
-{
+void LIST_next (List * l){
 	if (l -> pdi != l -> ult){
 		l -> pdi = l -> pdi -> seg;
 	}
@@ -169,7 +166,7 @@ int LIST_isEmpty (List l){
 *		   1 si tot esta bé
 *
 ************************************************/
-int LIST_deleteElement(List * l){
+int LIST_deleteElement(List * l) {
 	Node* n;
 
 	if( l -> pdi == l -> pri || l -> pri == l -> ult){
@@ -187,7 +184,7 @@ int LIST_deleteElement(List * l){
 	}
 }
 
-int LIST_destroy (List * l){
+int LIST_destroy (List * l) {
 	LIST_goFirstNode(l);
 	int status = 1;
 	while(!LIST_isEmpty(*l)){
@@ -207,7 +204,7 @@ int LIST_destroy (List * l){
 * @Retorn: enter que ens diu el nombre d'elements de la llista
 *
 ************************************************/
-int LIST_size(List l){
+int LIST_size(List l) {
 	int i = 0;
 
 	LIST_goFirstNode(&l);
@@ -219,11 +216,10 @@ int LIST_size(List l){
 	return i;
 }
 
-Person LIST_getOldestPerson(List l)
-{
+Person LIST_getOldestPerson(List l) {
 	Person p;
 	LIST_goFirstNode(&l);
-	
+
 	if (LIST_isEmpty(l)) return PERSON_undefined();
 
 	p = l.pdi->person;
@@ -235,8 +231,8 @@ Person LIST_getOldestPerson(List l)
 
 	return p;
 }
-Person LIST_getYoungestPerson(List l)
-{
+
+Person LIST_getYoungestPerson(List l) {
 	Person p;
 	LIST_goFirstNode(&l);
 
@@ -254,16 +250,16 @@ Person LIST_getYoungestPerson(List l)
 	return p;
 }
 
-int LLISTA_add (List* l, Person p){
+int LIST_add (List* l, Person p){
 	Node* n = NULL;
-	LIST_goFirstNode(l);
+
+	l -> pdi = l -> pri -> seg;
 	if(l -> pdi != l -> pri){
 
 		n = (Node*)malloc(sizeof(Node));
 
 		if(n == NULL){
 			write(1, ERR_LIST_CREATE_NODE, strlen(ERR_LIST_CREATE_NODE));
-			return 0;
 		}
 		else{
 			n -> person = p;
@@ -271,11 +267,10 @@ int LLISTA_add (List* l, Person p){
 			n -> ant = l -> pdi -> ant;
 			l -> pdi -> ant -> seg = n;
 			l -> pdi -> ant = n;
-			return 1;
 		}
 	}
 	else{
 		write(1, ERR_LIST_INSERT, strlen(ERR_LIST_INSERT));
-		return 0;
 	}
+	return 1;
 }

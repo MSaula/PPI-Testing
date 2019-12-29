@@ -1,9 +1,11 @@
+#ifndef _PERSON_
+#define _PERSON_
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct
-{
+typedef struct {
     char *name;
     int age;
 } Person;
@@ -18,3 +20,5 @@ Person PERSON_undefined();
 int PERSON_isUndefined(Person p);
 int PERSON_compareByName(Person p1, Person p2);
 int PERSON_compareByAge(Person p1, Person p2);
+
+#endif
