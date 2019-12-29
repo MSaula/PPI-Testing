@@ -222,12 +222,13 @@ Person LIST_getOldestPerson(List l) {
 
 	if (LIST_isEmpty(l)) return PERSON_undefined();
 
+	l.pdi = l.pri -> seg;
 	p = l.pdi->person;
 
-	while(!LIST_fi(l)){
+	do {
+		p = (PERSON_getAge(p) < PERSON_getAge(l.pdi->person)) ? l.pdi->person : p;
 		LIST_next(&l);
-		p = p.age < l.pdi->person.age ? l.pdi->person : p;
-	}
+	} while (!LIST_fi(l));
 
 	return p;
 }
@@ -236,16 +237,15 @@ Person LIST_getYoungestPerson(List l) {
 	Person p;
 	LIST_goFirstNode(&l);
 
-	if (LIST_isEmpty(l))
-		return PERSON_undefined();
+	if (LIST_isEmpty(l)) return PERSON_undefined();
 
+	l.pdi = l.pri -> seg;
 	p = l.pdi->person;
 
-	while(!LIST_fi(l)){
+	do {
+		p = (PERSON_getAge(p) > PERSON_getAge(l.pdi->person)) ? l.pdi->person : p;
 		LIST_next(&l);
-
-		p = p.age > l.pdi->person.age ? l.pdi->person : p;
-	}
+	} while (!LIST_fi(l));
 
 	return p;
 }

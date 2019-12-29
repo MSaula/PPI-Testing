@@ -32,7 +32,7 @@ Person LIST_getFirstPerson (List l); //Tested
 int LIST_deletePerson (List * l, char* name); //Tested
 int LIST_deleteFirstPerson (List * l); //Tested
 int LIST_isEmpty (List l); //Tested
-int LIST_size (List l); //Done
+int LIST_size (List l); //Tested
 Person LIST_getOldestPerson (List l);
 Person LIST_getYoungestPerson (List l);
 

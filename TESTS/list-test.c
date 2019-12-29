@@ -114,3 +114,68 @@ TEST_CASE("Comprovant els getters", "[GET]") {
         REQUIRE(PERSON_compareByAge(paux, pauxx) == 0);
     }
 }
+
+TEST_CASE("Comprovant la funció LIST_size()", "[SIZE]") {
+    List l;
+    Person p1, p2;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 345);
+
+    SECTION("Size al afegir elements") {
+        REQUIRE(LIST_size(l) == 0);
+        LIST_add(&l, p1);
+        REQUIRE(LIST_size(l) == 1);
+        LIST_add(&l, p2);
+        REQUIRE(LIST_size(l) == 2);
+    }
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+
+    SECTION("Size al eliminar elements") {
+        REQUIRE(LIST_size(l) == 2);
+        LIST_deletePerson(&l, nom1);
+        REQUIRE(LIST_size(l) == 1);
+        LIST_deletePerson(&l, nom2);
+        REQUIRE(LIST_size(l) == 0);
+    }
+}
+
+TEST_CASE("Comprovant els getters d'edat", "[GET_LIMIT_AGE]") {
+    List l;
+    Person p1, p2, p3, p4, p5, paux;
+    char nom1[] = "Ramon";
+    char nom2[] = "Antonia";
+    char nom3[] = "Miquel";
+
+    l = LIST_create();
+
+    p1 = PERSON_create(nom1, 93);
+    p2 = PERSON_create(nom2, 33);
+    p3 = PERSON_create(nom3, 21);
+    p4 = PERSON_create(nom2, 22);
+    p5 = PERSON_create(nom1, 27);
+
+    LIST_add(&l, p1);
+    LIST_add(&l, p2);
+    LIST_add(&l, p3);
+    LIST_add(&l, p4);
+    LIST_add(&l, p5);
+
+    SECTION("Obtenció del més gran") {
+        paux = LIST_getOldestPerson(l);
+        REQUIRE(PERSON_compareByName(paux, p1) == 0);
+        REQUIRE(PERSON_compareByAge(paux, p1) == 0);
+    }
+
+    SECTION("Obtenció del més petit") {
+        paux = LIST_getYoungestPerson(l);
+        REQUIRE(PERSON_compareByName(paux, p3) == 0);
+        REQUIRE(PERSON_compareByAge(paux, p3) == 0);
+    }
+}
