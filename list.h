@@ -25,13 +25,13 @@ typedef struct {
 	Node * pdi;
 } List;
 
-List LIST_create (void); //Done
-int LIST_add (List * l, Person p); //Done
-Person LIST_getPerson (List l, char* name); //Done
-Person LIST_getFirstPerson (List l); //
-int LIST_deletePerson (List * l, char* name); //Done
-int LIST_deleteFirstPerson (List * l); //Done
-int LIST_isEmpty (List l); //Done
+List LIST_create (void); //Tested
+int LIST_add (List * l, Person p); //Tested
+Person LIST_getPerson (List l, char* name); //Tested
+Person LIST_getFirstPerson (List l); //Tested
+int LIST_deletePerson (List * l, char* name); //Tested
+int LIST_deleteFirstPerson (List * l); //Tested
+int LIST_isEmpty (List l); //Tested
 int LIST_size (List l); //Done
 Person LIST_getOldestPerson (List l);
 Person LIST_getYoungestPerson (List l);

@@ -69,7 +69,7 @@ int LIST_deletePerson(List *l, char *name)
 
 				break;
 			} else {
-				n = n->seg;
+				l->pdi = l->pdi->seg;
 			}
 		}
 	}
